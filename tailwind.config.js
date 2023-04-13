@@ -12,7 +12,9 @@ export default {
         searchResult:'rgba(93,92,108,1)'
       },
       height:{
-        fullHeight:'100vh'
+        fullHeight:'100vh',
+        cardHeight:'300px',
+        imgDivHeight:'80%'
       },
       width:{
         animeCardSize:'48%',

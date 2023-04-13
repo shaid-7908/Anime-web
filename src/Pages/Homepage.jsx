@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Menubar from '../assets/align-justify-svgrepo-com.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
 
 export default function Homepage() {
@@ -11,7 +12,14 @@ export default function Homepage() {
  const [searchText,setSearchText]=useState('')
  const [trendingAnime,setTrendingAnime]=useState()
 
-  const mobileMenuClassName=['md:hidden']
+
+ useEffect(()=>{
+    axios.get(import.meta.env.VITE_ANIME_API+'/trending?page=1&perPage=6').then((res)=>{
+      setTrendingAnime(res?.data.results)
+      console.log(res?.data.results)
+    })
+ },[])
+
   const handleClick=()=>{
     setMobileMenuState(!mobileMenuState)
   
@@ -21,7 +29,7 @@ export default function Homepage() {
     setSearchText(e.traget.value)
   }
   return (
-    <div className='container relative mx-auto bg-darkBackgroung h-fullHeight text-white'>
+    <div className='container relative mx-auto bg-darkBackgroung max-h-fit md:h-fullHeight text-white'>
        <div className='flex items-center justify-between py-3 px-3'>
          <span>Logo</span>
           <nav className='hidden md:flex space-x-6 font-semibold mx-auto'>
@@ -58,27 +66,31 @@ export default function Homepage() {
           </nav>
         </div>
        </div>
+       {/* Trending Section */}
         <div className='flex flex-col flex-wrap p-3'>
           <h1 className='text-green-300 text-2xl md:text-4xl'>Trending</h1>
           <div className='flex flex-wrap '>
-            <div className="w-animeCardSize min-w-min bg-red-200 mx-auto my-1 md:w-midScreenCard md:mx-auto md:my-3">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi qui voluptatem fugiat? Odit tempore possimus fuga! Esse voluptatem, magni reiciendis vel perspiciatis voluptates ratione culpa, dicta, doloremque fugit quis.
+           {trendingAnime?.map((element)=>{
+            return (
+              <div key={element.id} className="w-animeCardSize min-w-min bg-litedarkBackground transition ease-in-out delay-150 duration-300 overflow-hidden md:hover:scale-125 md:hover:rounded-md mx-auto my-1 md:w-midScreenCard md:mx-auto md:h-cardHeight md:my-3">
+             <div className='h-imgDivHeight'>
+             <img src={element.image} alt='na'
+             style={{
+              objectFit:'cover',
+              width:'100%',
+              height:'100%'
+             }}
+             
+             /></div>
+             <h2 className='font-semibold text-sm p-1 '>{element.title.english}</h2>
             </div>
-            <div className="w-animeCardSize bg-red-200 mx-auto my-1 md:w-midScreenCard md:mx-auto md:my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi qui voluptatem fugiat? Odit tempore possimus fuga! Esse voluptatem, magni reiciendis vel perspiciatis voluptates ratione culpa, dicta, doloremque fugit quis.
-            </div>
-            <div className="w-animeCardSize bg-red-200 mx-auto my-1 md:w-midScreenCard md:mx-auto md:my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi qui voluptatem fugiat? Odit tempore possimus fuga! Esse voluptatem, magni reiciendis vel perspiciatis voluptates ratione culpa, dicta, doloremque fugit quis.
-            </div>
-            <div className="w-animeCardSize bg-red-200 mx-auto my-1 md:w-midScreenCard md:mx-auto md:my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi qui voluptatem fugiat? Odit tempore possimus fuga! Esse voluptatem, magni reiciendis vel perspiciatis voluptates ratione culpa, dicta, doloremque fugit quis.
-            </div>
-            <div className="w-animeCardSize bg-red-200 mx-auto my-1 md:w-midScreenCard md:mx-auto md:my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi qui voluptatem fugiat? Odit tempore possimus fuga! Esse voluptatem, magni reiciendis vel perspiciatis voluptates ratione culpa, dicta, doloremque fugit quis.
-            </div>
-            <div className="w-animeCardSize bg-red-200 mx-auto my-1 md:w-midScreenCard md:mx-auto md:my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi qui voluptatem fugiat? Odit tempore possimus fuga! Esse voluptatem, magni reiciendis vel perspiciatis voluptates ratione culpa, dicta, doloremque fugit quis.
-            </div>
+            )
+           })}
+          
+           
+            
+            
+            
           </div>
         </div>
     </div>
