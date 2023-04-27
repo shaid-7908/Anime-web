@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../Component/Nav'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 export default function Homepage() {
@@ -23,8 +24,15 @@ export default function Homepage() {
       <Nav/>
        {/* Trending Section */}
         <div className='flex flex-col flex-wrap p-3'>
-          <div></div>
+          <div className='flex justify-between'>
           <h1 className='text-green-300 text-2xl md:text-4xl'>Trending</h1>
+          <span className='underline underline-offset-1'>
+            <Link to='/viewall-trending'>
+            View all
+            </Link>
+            
+            </span>
+          </div>
           <div className='flex flex-wrap '>
            {trendingAnime?.map((element)=>{
             return (
