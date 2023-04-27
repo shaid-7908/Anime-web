@@ -2,14 +2,15 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Homepage from './Pages/Homepage'
-
+import { HashRouter, Route,Routes } from 'react-router-dom'
+import Trending from './Pages/Trending'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-
+ 
     {/* // <div className="bg-red">
     //   <div>
     //     <a href="https://vitejs.dev" target="_blank">
@@ -32,7 +33,12 @@ function App() {
     //     Click on the Vite and React logos to learn more
     //   </p>
     // </div> */}
-      <Homepage/>
+      <HashRouter>
+      <Routes>
+        <Route path='/' element={<Homepage/>}/>
+        <Route path='/viewall-trending' element={<Trending/>}/>
+        </Routes>
+      </HashRouter>
     
     </>
   )

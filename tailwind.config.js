@@ -17,6 +17,7 @@ export default {
         imgDivHeight:'80%'
       },
       width:{
+        cw:'24%',
         animeCardSize:'48%',
         midScreenCard:'15%',
       }
