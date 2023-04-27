@@ -10,7 +10,7 @@ export default function Homepage() {
 
 
  useEffect(()=>{
-    axios.get(import.meta.env.VITE_ANIME_API+'/TRENDING?page=1&perPage=6').then((res)=>{
+    axios.get(import.meta.env.VITE_ANIME_API+'/TRENDING?page=1&perPage=4').then((res)=>{
       setTrendingAnime(res?.data.results)
       console.log(res?.data.results)
     })
@@ -20,37 +20,57 @@ export default function Homepage() {
  
   return (
     <div className='bg-darkBackgroung'>
-    <div className='container relative mx-auto  max-h-fit md:h-fullHeight text-white'>
+    <div className='container relative mx-auto  max-h-fit md:h-full text-white'>
       <Nav/>
        {/* Trending Section */}
         <div className='flex flex-col flex-wrap p-3'>
           <div className='flex justify-between'>
           <h1 className='text-green-300 text-2xl md:text-4xl'>Trending</h1>
-          <span className='underline underline-offset-1'>
-            <Link to='/viewall-trending'>
+          <Link to='/viewall-trending'>
+          <div className='bg-green-500 px-2 py-1 rounded-md mr-2'>
+          <span className=' text-slate-900 font-semibold'>
+            
             View all
-            </Link>
+          
             
             </span>
+          </div>
+            </Link>
+       
           </div>
           <div className='flex flex-wrap '>
            {trendingAnime?.map((element)=>{
             return (
-              <div key={element.id} className="w-animeCardSize min-w-min bg-litedarkBackground transition ease-in-out delay-150 duration-300 overflow-hidden md:hover:scale-125 md:hover:rounded-md mx-auto my-1 md:w-midScreenCard md:mx-auto md:h-cardHeight  md:my-3">
-             <div className='h-imgDivHeight'>
-             <img src={element.image} alt='na'
-             style={{
-              objectFit:'cover',
-              width:'100%',
-              height:'100%'
-             }}
+              <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4 " key={element.id}>
+              <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden md:h-minCardHeight">
+              <div class="relative pb-48 overflow-hidden">
+                <img class="absolute inset-0 h-full w-full object-cover" src={element.image} alt=""/>
+              </div>
+              <div class="p-4">
+                <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Trending</span>
+                <h2 className="mt-2 mb-2 text-slate-700  font-bold">{element.title.romaji}</h2>
+               
+               
+              </div>
+              <div class="p-4 border-t border-b text-xs text-gray-700">
+                <span class="flex items-center mb-1">
+                  <i class="far fa-clock fa-fw mr-2 text-gray-900 font-semibold"></i> Genres :
+                </span>
+                <div className='flex'>
+
+              
+                {element.genres.map((e)=>(
+                  <span class="flex items-center">
+                  <i class="far fa-address-card fa-fw text-gray-900 mr-1"></i> {e} 
+                </span> 
+                ))}
+                  </div>
+                       
+              </div>
              
-             /></div>
-             <h2 className='font-semibold text-sm p-1 '>{element.title.romaji}</h2>
-             <span style={{fontSize:'10px'}} className='p-1'>Geners :</span> {element.genres.map((e,index)=>{
-             return <span key={index} style={{fontSize:'10px'}}>{e} ,</span>
-             })}
+            </a>
             </div>
+      
             )
            })}
           

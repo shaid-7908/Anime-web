@@ -44,7 +44,7 @@ export default function Nav() {
        
         <div
           id="menu"
-          className="bg-litedarkBackground absolute flex-col items-center md:hidden self-end py-8 mt-10 space-y-6 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md"
+          className="bg-litedarkBackground absolute flex-col items-center md:hidden self-end py-8 mt-10 space-y-6 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md z-10 "
         > 
            <nav className='flex flex-col space-y-6 font-semibold mx-auto text-white justify-center items-center cursor-pointer'>
             <a href='#'>Home</a>

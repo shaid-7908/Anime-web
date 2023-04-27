@@ -11,10 +11,14 @@ export default {
         litedarkBackground:'rgba(59,55,138,1)',
         searchResult:'rgba(93,92,108,1)'
       },
+      minHeight:{
+        minCardHeightMediumSc:'382px'
+      },
       height:{
         fullHeight:'100vh',
         cardHeight:'300px',
-        imgDivHeight:'80%'
+        imgDivHeight:'80%',
+        minCardHeight:'382px'
       },
       width:{
         cw:'24%',
